@@ -1,6 +1,6 @@
 class Solution {
     public List<String> letterCombinations(String digits) {
-        Dictionary<char, String> table = new Hashtable<>();
+        Map<Character, String> table = new HashMap<>();
         table.put('2', "abc");
         table.put('3', "def");
         table.put('4', "ghi");
@@ -10,20 +10,20 @@ class Solution {
         table.put('8', "tuv");
         table.put('9', "wxyz");
 
-        ArrayList<String> combinations = new ArrayList<String>();
+        List<String> combinations = new ArrayList<>();
 
-        if (digits.size() == 0)
-        {
+        if (digits.length() == 0) {
             return combinations;
         }
 
-        for (char digit : digits) {
-            
-            ArrayList<String> temp = new ArrayList<String>();
+        combinations.add("");
+
+        for (char digit : digits.toCharArray()) {
+            List<String> temp = new ArrayList<>();
 
             for (String combination : combinations) {
-
-                for (char letter : table[digit]) {
+                String letters = table.get(digit);
+                for (char letter : letters.toCharArray()) {
                     temp.add(combination + letter);
                 }
             }
