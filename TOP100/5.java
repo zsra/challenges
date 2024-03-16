@@ -1,42 +1,20 @@
 class Solution {
-
-  int begin = 0;
-  int end = 0;
-
   public String longestPalindrome(String s) {
-    if (s == null) {
-      return "";
-    }
-    char[] chArray = s.toCharArray();
-    getPalindrome(chArray, 0);
-    return s.substring(begin, end + 1);
-  }
+    int n = s.length();
+    String res = null;
 
-  private void getPalindrome(char[] chArray, int index) {
-    int low = index, high = index, length = chArray.length;
+    boolean[][] table = new bolean[n][n];
 
-    if (index > length) {
-      return;
-    }
-    while (high < length - 1 && chArray[high] == chArray[high + 1]) {
-      high++;
-    }
-    index = high;
+     for (int i = n - 1; i >= 0; i--) {
+        for (int j= i; j < n; j++) {
+            table[i][j] = s.charAt(i) == s.charAt(j) &&  (j - i < 3 || table[i + 1][j - 1]);
 
-    while (
-      low - 1 >= 0 &&
-      high + 1 <= length - 1 &&
-      chArray[low - 1] == chArray[high + 1]
-    ) {
-      low--;
-      high++;
-    }
+            if ( table[i][j]  && (res == null || j - i + 1 > res.length())) {
+                res = s.substring(i, j + 1);
+            }
+        }
+     }
 
-    if (end - begin < high - low) {
-      begin = low;
-      end = high;
-    }
-
-    getPalindrome(chArray, index + 1);
+     return res;
   }
 }
