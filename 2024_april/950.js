@@ -17,5 +17,3 @@ var deckRevealedIncreasing = function(deck) {
 
     return revealedDeck;
 };
-
-deckRevealedIncreasing([17,13,11,2,3,5,7]);
