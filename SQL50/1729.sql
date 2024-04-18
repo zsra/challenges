@@ -1,4 +1,5 @@
-SELECT user_id, COUNT(follower_id ) as followers_count
-FROM Followers
-GROUP BY user_id
-ORDER BY user_id
+SELECT max(num) num
+FROM (SELECT num
+FROM MyNumbers
+GROUP BY num
+HAVING count(num) = 1) x
