@@ -1,48 +1,10 @@
 public string ReversePrefix(string word, char ch)
 {
-    Stack<char> stack = new();
-    List<char> list = new();
-    bool isExist = false;
+        var arr = word.ToCharArray();
+        var idx = word.IndexOf(ch);
 
-    for (int i = 0; i < word.Length; i++)
-    {
-        stack.Push(word[i]);
+        if (idx >= 0)
+            Array.Reverse(arr, 0, idx + 1);
 
-        if (word[i] == ch)
-        {
-
-            if (i + 1 >= word.Length) 
-            {
-                isExist = !isExist;
-                break;
-            }
-
-            for (int j = i + 1; j < word.Length; j++)
-            {
-                list.Add(word[j]);
-            }
-
-            isExist = !isExist;
-            break;
-        }
-    }
-
-    if (!isExist)
-    {
-        return word;
-    }
-
-    StringBuilder stringBuilder = new();
-
-    while (stack.Count > 0)
-    {
-        stringBuilder.Append(stack.Pop());
-    }
-
-    foreach (char c in list)
-    {
-        stringBuilder.Append(c);
-    }
-
-    return stringBuilder.ToString();
+        return new string(arr);
 }
